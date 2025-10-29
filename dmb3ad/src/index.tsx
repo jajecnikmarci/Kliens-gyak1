@@ -7,17 +7,17 @@ import { useEffect, useState } from 'preact/hooks';
 import { chatService } from './ChatService';
 
 export function App() {
-	let [loggedIn, setLoggedIn] = useState(false);
-
+	//let [loggedIn, setLoggedIn] = useState(false);
+	let [renderCount, setRenderCount] = useState(1);
 	useEffect(() => {
 
-		const listener = () => setLoggedIn(!!chatService.inbox);
+		const listener = () => setRenderCount(c => c + 1);
 		chatService.addListener(listener);
 		return () => chatService.removeListener(listener);
 	}, []);
 
 	return (
-		loggedIn ? <Main /> : <Login />
+		chatService.inbox ? <Main /> : <Login />
 	);
 }
 
