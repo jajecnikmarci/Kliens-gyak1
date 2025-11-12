@@ -11,3 +11,15 @@ async function impl(e) {
     }
 }
 self.addEventListener("fetch", e => e.respondWith(impl(e))); // Eseményre feliratkozás 
+
+// Push esemény kezelése
+self.addEventListener("push", e => {
+    const message = e.data?.text(); // Üzenet tartalmának lekérése
+    if (message) {
+        // Értesítés megjelenítése
+        const notificationPromise = self.registration.showNotification("Chat Notification", {
+            body: message
+        });
+        e.waitUntil(notificationPromise);
+    }
+}); 
