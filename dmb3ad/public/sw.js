@@ -16,7 +16,10 @@ self.addEventListener("fetch", e => e.respondWith(impl(e))); // Eseményre felir
 self.addEventListener("push", e => {
     const message = e.data?.text(); // Üzenet tartalmának lekérése
     if (message) {
-        // Itt kezeljük az értesítést
-        console.log("Push üzenet érkezett:", message);
+        // Értesítés megjelenítése
+        const notificationPromise = self.registration.showNotification("Chat Notification", {
+            body: message
+        });
+        e.waitUntil(notificationPromise);
     }
 }); 
