@@ -23,3 +23,6 @@ export function App() {
 }
 
 render(<App />, document.getElementById('app'));
+
+// Push notification engedély kérése
+Notification.requestPermission();
